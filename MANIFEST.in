@@ -1,0 +1,4 @@
+include LICENSE
+include README.rst
+recursive-include prayer-wall/static *
+recursive-include prayer-wall/templates *
