@@ -1,24 +1,21 @@
-import os
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from setuptools import setup
+import re
+import os
+import sys
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-    README = readme.read()
 
-# allow setup.py to be run from any path
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-
-setup(
-    name='django-prayer-wall',
-    version='0.1',
-    packages=['prayer-wall'],
-    include_package_data=True,
-    license='BSD License',  # example license
-    description='A Django app to conduct Web-based prayer wall.',
-    long_description=README,
-    url='http://www.example.com/',
-    author='Peter Yan',
-    author_email='yanbide@gmail.com',
-    classifiers=[
+name = 'prayer-wall'
+package = 'prayer-wall'
+description='A Django app to conduct Web-based prayer wall.'
+url = 'https://github.com/'
+author = 'Peter Yan'
+author_email = 'yanbide@gmail.com'
+license = 'BSD License'
+install_requires = ['']
+classifiers = [
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
@@ -27,5 +24,61 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    ],
+]
+
+
+def get_version(package):
+    """
+    Return package version as listed in `__version__` in `init.py`.
+    """
+    init_py = open(os.path.join(package, '__init__.py')).read()
+    return re.search("^__version__ = ['\"]([^'\"]+)['\"]", init_py, re.MULTILINE).group(1)
+
+
+def get_packages(package):
+    """
+    Return root package and all sub-packages.
+    """
+    return [dirpath
+            for dirpath, dirnames, filenames in os.walk(package)
+            if os.path.exists(os.path.join(dirpath, '__init__.py'))]
+
+
+def get_package_data(package):
+    """
+    Return all files under the root package, that are not in a
+    package themselves.
+    """
+    walk = [(dirpath.replace(package + os.sep, '', 1), filenames)
+            for dirpath, dirnames, filenames in os.walk(package)
+            if not os.path.exists(os.path.join(dirpath, '__init__.py'))]
+
+    filepaths = []
+    for base, filenames in walk:
+        filepaths.extend([os.path.join(base, filename)
+                          for filename in filenames])
+    return {package: filepaths}
+
+
+if sys.argv[-1] == 'publish':
+    os.system("python setup.py sdist upload")
+    args = {'version': get_version(package)}
+    print("You probably want to also tag the version now:")
+    print("  git tag -a %(version)s -m 'version %(version)s'" % args)
+    print("  git push --tags")
+    sys.exit()
+
+
+setup(
+    name=name,
+    version=get_version(package),
+    url=url,
+    license=license,
+    description=description,
+    author=author,
+    author_email=author_email,
+    packages=get_packages(package),
+    package_data=get_package_data(package),
+    install_requires=install_requires,
+    classifiers=classifiers
 )
