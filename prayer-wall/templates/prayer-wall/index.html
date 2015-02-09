@@ -1,13 +1,40 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>UWMCCF prayer wall</title>
 
-<div id="new">
-	<h1> This is a test page</h1>
-	<p> Hello Mccf prayer wall</p>
-</div>
+<!-- Bootstrap -->
 
-<div id="old">
-	<h1> This is another test title</h1>
-	<p> blah blah blah</p>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+	<div class="title">
+		<div class="container">
+			<h1>Prayer Wall</h1>
+		</div>
 	</div>
 
+	<div class="prayer-form">
+		<div class="container">
+		<form class="form-prayer-wall" method="POST">
+			{%csrf_token%}
+			<!-- <label for="prayer-name">Name</label> -->
+			<input type="text" name="prayer-name" id="prayer-name-input" placeholder="Name">
+			<input type="text" name="prayer-email" id="prayer-email-input" placeholder="Email">
+			<input type="text" name="prayer-request" id="prayer-request-input" placeholder="Prayer">
+			<input class="btn btn-lg btn-primary btn-block" id="submit" type="submit" value="submit"/>
+		</form>
+		</div>
+	</div>
+
+</body>
 </html>
