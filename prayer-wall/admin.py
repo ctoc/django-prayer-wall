@@ -5,7 +5,8 @@ from django.contrib import admin
 from .models import PrayerRequest
 
 class PrayerRequestAdmin(admin.ModelAdmin):
-	class Meta:
-		models = PrayerRequest
+    list_display = ('name', 'email', 'request', 'count', 'timestamp')
+    class Meta:
+        models = PrayerRequest
 
 admin.site.register(PrayerRequest, PrayerRequestAdmin)
