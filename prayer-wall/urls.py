@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     
-    url(r'^$', 'prayer-wall.views.index'),
+    url(r'index', 'prayer-wall.views.home' ),
 )
