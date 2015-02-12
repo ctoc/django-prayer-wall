@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<body>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <div class="prayer-form">
+        <div class="container">
+        <form class="form-prayer-wall" method="POST">
+            {%csrf_token%}
+            <!-- <label for="prayer-name">Name</label> -->
+            <input type="text" name="prayer-name" id="prayer-name-input" placeholder="Name Test">
+            <input type="text" name="prayer-email" id="prayer-email-input" placeholder="Email">
+            <input type="text" name="prayer-request" id="prayer-request-input" placeholder="Prayer">
+            <input class="btn btn-lg btn-primary btn-block" id="submit" type="submit" value="submit"/>
+        </form>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
