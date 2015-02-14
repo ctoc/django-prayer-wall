@@ -16,6 +16,20 @@
         </form>
         </div>
     </div>
+	
+	{% if prayer_requests %}
+	<div>
+		<div class="container">
+			{% for a in prayer_requests%}
+			<div>
+				<div class="container">
+					<p>{{a}}</p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
 
 </body>
 {% endblock %}
