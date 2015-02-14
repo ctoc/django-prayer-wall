@@ -6,16 +6,21 @@
 
     <div class="prayer-form">
         <div class="container">
-        <form class="form-prayer-wall" method="POST">
-            {%csrf_token%}
-            <!-- <label for="prayer-name">Name</label> -->
-            <input type="text" name="prayer-name" id="prayer-name-input" placeholder="Name Test">
-            <input type="text" name="prayer-email" id="prayer-email-input" placeholder="Email">
-            <input type="text" name="prayer-request" id="prayer-request-input" placeholder="Prayer">
-            <input class="btn btn-lg btn-primary btn-block" id="submit" type="submit" value="submit"/>
-        </form>
+            <form class="form-prayer-wall" id="requestForm">
+                {%csrf_token%}
+                <input type="text" name="prayer-name" placeholder="Name">
+                <input type="text" name="prayer-email" placeholder="Email">
+                <input type="text" name="prayer-request" placeholder="Prayer">
+                <input type="submit" value="Submit">
+                <!-- <label for="prayer-name">Name</label> -->
+                <!-- <input type="text" name="prayer-name" id="prayer-name-input" placeholder="Name Test">
+                <input type="text" name="prayer-email" id="prayer-email-input" placeholder="Email">
+                <input type="text" name="prayer-request" id="prayer-request-input" placeholder="Prayer">
+                <input class="btn btn-lg btn-primary btn-block" id="submit1" type="submit" value="submit"/> -->
+            </form>
+            <div id="result"></div>
+            <script src="{{ STATIC_URL }}js/prayer-request.js"></script>
         </div>
     </div>
-
 </body>
 {% endblock %}
